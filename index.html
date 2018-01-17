@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
+
+
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="assets/ico/favicon.png">
+    <style>
+div#about-window {
+    max-width: 800px;
+    position: fixed;
+    width: 90%;
+    z-index: 999;
+    left:  50%;
+    transform: translateX(-50%);
+    box-shadow: 13px 24px 0 #000000a3;
+}
+    .ace_content * {
+    font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
+    font-style: normal !important;
+}
+
+.main-container.lead {border-color: yellow !important;}
+
+.ace_gutter {
+    display: none;
+}
+
+.ace_scroller {
+    left: 0 !important;
+}
+
+.main-container {
+    position: relative;
+    height: calc(100vh - 90px);
+    margin-top: -20px;
+}
+
+div#editor {
+    background-color: transparent;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+}
+
+.ace_print-margin {
+    display: none;
+}
+
+.ace_active-line {
+    background: transparent !important;
+}
+
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAUCAYAAAC07qxWAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gcDFQEauuENoQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAMElEQVQoz+3OsRUAMAiE0J/sP8ktaUbQKpU0dDwkKVTngzLgQhKd58VJDfZxHz88Pskyd6WC8EshAAAAAElFTkSuQmCC);
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAUCAYAAAC07qxWAAAABmJLR0QAqgCqAKohOK4IAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gcDFQUHvYukfAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAN0lEQVQoz2NctWrV/7CwMIZVq1YxwAA2PuOqVav+MxABmJA5YWFhDLj4pJmIz6RRN466kY5uBADTXD4rLyOdtwAAAABJRU5ErkJggg==);
+}
+
+::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAATCAYAAACp65zuAAAABmJLR0QAqgCqAKohOK4IAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gcDFDsJGjT4MQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAPElEQVQoz2NkYGD4z0AEYGIgEtBB4apVqxhWrVqFXyGyAnTFTLgk0MUY0YMHJhkWFjZog2cQKmQcAskMACngEhVL4dBXAAAAAElFTkSuQmCC);
+}
+::-webkit-scrollbar-button:vertical:increment {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAATCAYAAACp65zuAAAABmJLR0QAqgCqAKohOK4IAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gcDFDotPywtoQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAQklEQVQoz2NkYGD4z0AEYGIgEtBB4apVqxhWrVo1qN04CBUywuIaW9gxMDAwhIWFoZoIE8CmCMNqZAl0jYxDIJkBAJ9zDiU3UTb4AAAAAElFTkSuQmCC);
+  background-position: 0px -2px;
+}
+
+#editor .ace_cursor {
+    color: yellow !important;
+    width: 10px !important;
+    border-left-width: 10px;
+}
+
+.ace-monokai .ace_marker-layer .ace_selection {
+    background: darkviolet !important;
+}
+
+#editor .ace-monokai .ace_string {
+    color: yellow !important;
+}
+
+#editor .ace-monokai .ace_gutter {
+    background: black !important;
+    color: gray !important;
+}
+
+#editor .ace-monokai .ace_entity.ace_name.ace_tag,
+#editor .ace-monokai .ace_keyword,
+#editor .ace-monokai .ace_meta.ace_tag,
+#editor .ace-monokai .ace_storage {
+    color: red !important;
+}
+
+#editor .ace-monokai .ace_punctuation,
+#editor .ace-monokai .ace_punctuation.ace_tag {
+    color: #fff !important;
+}
+
+#editor .ace-monokai .ace_constant.ace_character,
+#editor .ace-monokai .ace_constant.ace_language,.ace-monokai .ace_constant.ace_numeric,.ace-monokai .ace_constant.ace_other {
+    color: lightpink !important;
+}
+
+#editor .ace-monokai .ace_invalid {
+    color: lightgray !important;
+    background-color: red !important;
+}
+
+#editor .ace-monokai .ace_invalid.ace_deprecated {
+    color: lightcoral !important;
+    background-color: purple !important;
+}
+
+#editor .ace-monokai .ace_support.ace_constant,
+#editor .ace-monokai .ace_support.ace_function {
+    color: lightblue !important;
+}
+
+#editor .ace-monokai .ace_fold {
+    background-color: lime !important;
+    border-color: wheat !important;
+}
+
+#editor .ace-monokai .ace_storage.ace_type,
+#editor .ace-monokai .ace_support.ace_class,
+#editor .ace-monokai .ace_support.ace_type {
+    font-style: italic !important;
+    color: lightsalmon !important;
+}
+
+#editor .ace-monokai .ace_entity.ace_name.ace_function,
+#editor .ace-monokai .ace_entity.ace_other,
+#editor .ace-monokai .ace_entity.ace_other.ace_attribute-name,
+#editor .ace-monokai .ace_variable {
+    color: lime !important;
+}
+
+#editor .ace-monokai .ace_variable.ace_parameter {
+    font-style: italic;
+    color: orange !important;
+}
+
+#editor .ace-monokai .ace_comment {
+    color: darkgrey !important;
+}
+
+#editor .ace_search_options * {
+    font-family: inherit !important;
+}
+
+#editor .ace_search.right {
+    border-radius: 0 !important;
+    right: 3px !important;
+    outline: 3px solid yellow;
+    border-top: 3px solid yellow;
+    background-color: #bbbbbb;
+}
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">Editor</a>
+          <!--/.nav-collapse -->
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a class="toggle-about">About</a></li>
+              <li><a href="https://ionicabizau.net/contact">Contact</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a class="toggle-about">About</a></li>
+                  <li class="divider"></li>
+                  <li><a href="https://ionicabizau.net/contact">Contact</a></li>
+                  <li><a href="https://github.com/IonicaBizau/msdos-editor">GitHub Repository</a></li>
+                  <li><a href="https://kristopolous.github.io/BOOTSTRA.386/">Check out BOOTSTRA.386</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-unit text-center" id="about-window" style="display:none">
+        <h1>
+            An MS-DOS Like Editor
+            <br>
+            About
+        </h1>
+        <p>You may remember the days when you were coding in Borland C++ or Pascal. Whatever it was. It was blue. I mean, this kind of blue like here. I hope this project will bring you those memories back.</p>
+        <p><a href="https://github.com/IonicaBizau/msdos-editor" class="btn btn-primary btn-large">GitHub Repository</a> <a href="#" class="btn btn-success btn-large toggle-about">Close</a></p>
+      </div>
+
+    <div class="container-fluid">
+        <div class="main-container lead">
+      <div id="editor">/**
+ * Hey!
+ *
+ * * * *
+ *
+ * This is your private space where you can write
+ * the code and whatever you write will be saved
+ * in the local storage.
+ *
+ * Especially if you are old enough I hope you will enjoy
+ * the design as well.
+ *
+ * For now, below you find a short JavaScript program.
+ *
+ * GitHub Project:
+ * https://github.com/IonicaBizau/msdos-editor
+ */
+
+class Person {
+    constructor (name) {
+        this.name = name
+    }
+    getName() {
+        return this.name
+    }
+    toString() {
+        return this.getName()
+    }
+}
+
+const sayHello = name => {
+    console.info(`Saying hello to ${name}`)
+    console.log(`Hello, ${name}!`)
+}
+
+const Alice = new Person("Alice")
+sayHello(Alice)
+
+
+</div>
+        </div>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/javascript");
+        editor.setFontSize(20)
+        editor.setOptions({ fontFamily: "DOS" })
+        editor.focus()
+
+        try {
+            var value = localStorage.getItem("editor_value")
+            if (value) {
+                editor.setValue(value, -1)
+            }
+        } catch (e) {}
+        editor.on("change", function (e) {
+            try {
+                localStorage.setItem("editor_value", editor.getValue())
+            } catch (e) {}
+        })
+
+        var aboutWindow = document.getElementById("about-window")
+        var toggleAbout = document.querySelectorAll(".toggle-about")
+        for (var i = 0; i < toggleAbout.length; ++i) {
+            toggleAbout[i].onclick = function () {
+                aboutWindow.style.display = aboutWindow.style.display === "none" ? "block" : "none";
+            }
+        }
+    </script>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+
+  </body>
+</html>
