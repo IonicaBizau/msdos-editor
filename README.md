@@ -9,22 +9,6 @@
 
 [![msdos-editor](https://i.imgur.com/Y2wsDLX.png)](https://ionicabizau.github.com/msdos-editor)
 
-## :memo: Documentation
-
-
-### `msdosEditor(a, b)`
-An MS-DOS like editor in your browser.
-
-#### Params
-
-- **Number** `a`: Param descrpition.
-- **Number** `b`: Param descrpition.
-
-#### Return
-- **Number** Return description.
-
-
-
 ## :yum: How to contribute
 Have an idea? Found a bug? See [how to contribute][contributing].
 
